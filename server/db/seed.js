@@ -1,9 +1,9 @@
-const client = require('./client');
+const client = require("./client");
 
-const seed = async()=> {
+const seed = async () => {
   try {
     await client.connect();
-    const SQL = `
+    const SQL = /* sql */ `
     DROP TABLE IF EXISTS things;
     CREATE TABLE things(
       id SERIAL PRIMARY KEY,
@@ -14,12 +14,10 @@ const seed = async()=> {
     INSERT INTO things(name) VALUES('bazz');
     `;
     await client.query(SQL);
-    console.log('data seeded');
-  }
-  catch(ex){
+    console.log("data seeded");
+  } catch (ex) {
     console.log(ex);
-  }
-  finally{
+  } finally {
     await client.end();
   }
 };
